@@ -1,3 +1,5 @@
+pub mod structs {
+
     // Questo permette di stampare la struct con println!("{:?}", instance);
     #[derive(Debug)]
     struct User {
@@ -17,8 +19,8 @@
         }
     }
 
-    fn main() {
-        let mut user1 : User = User {
+    pub fn run() {
+        let mut user1: User = User {
             email: String::from("user1@email.com"),
             username: String::from("user_1"),
             active: true,
@@ -29,14 +31,9 @@
         let user_email = user1.email.clone();
         // println!("{user_email}"); // user@email.com
 
-
         //# Istanziare struct User usando il constructor build_user()
-        let user2: User = build_user(
-            String::from("user2@email.com"),
-            String::from("user_2")
-        );
+        let user2: User = build_user(String::from("user2@email.com"), String::from("user_2"));
         // println!("user2: {:?}", user2);
-
 
         //# Update struct
         let user3: User = User {
@@ -47,10 +44,8 @@
         // println!("user3: {:?}", user3);
         // println!("user2.email: {:?}", user2.email);
 
-
         //# Istanza tuple struct
         let mut color1 = Color(255, 255, 0);
-
 
         //# Istanza Triangle
         /* let tri = Triangle {
@@ -58,7 +53,6 @@
             height: 50
         };
         println!("L'area del triangolo è {} pixel quadrati", triangle_area(&tri)); */
-
 
         //# Chiamate a metodi d'istanza
         /* println!("L'area del triangolo è {} pixel quadrati", tri.area());
@@ -69,11 +63,9 @@
         tri.enlarge(2);
         println!("Dopo l'ingrandimento, l'area del triangolo è {} pixel quadrati", tri.area()); */
 
-
         //# Chiamata del metodo associato
         /* let default_tri = Triangle::new_default_triangle();
         println!("Nuovo triangolo di default creato: {:#?}", default_tri); */
-
 
         //# Invocazione costruttore
         let tri2 = Triangle::new(10, 5);
@@ -83,12 +75,11 @@
     //, Tuple struct
     struct Color(i32, i32, i32);
 
-
     //, Passaggio istanze struct come parametri
     #[derive(Debug)]
     struct Triangle {
         width: u32,
-        height: u32
+        height: u32,
     }
 
     fn triangle_area(tri: &Triangle) -> u32 {
@@ -129,3 +120,4 @@
             Triangle { width, height }
         }
     }
+}
