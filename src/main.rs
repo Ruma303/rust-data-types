@@ -1,9 +1,11 @@
-mod array;
-mod slice;
-mod tuple;
+mod enums;
+mod structs;
+mod generics;
+mod traits;
 
 fn main() {
-    array::run();
-    slice::run();
-    tuple::run();
+    enums::run();
+    structs::run();
+    generics::run();
+    traits::run();
 }
