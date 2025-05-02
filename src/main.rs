@@ -1,11 +1,9 @@
-mod hashmap;
-mod hashset;
-mod string;
-mod vector;
+mod array;
+mod slice;
+mod tuple;
 
 fn main() {
-    vector::run();
-    string::run();
-    hashmap::run();
-    hashset::run();
+    array::run();
+    slice::run();
+    tuple::run();
 }
