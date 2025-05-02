@@ -1,7 +1,11 @@
-mod castings;
-mod scalars;
+mod hashmap;
+mod hashset;
+mod string;
+mod vector;
 
 fn main() {
-    castings::run();
-    scalars::run();
+    vector::run();
+    string::run();
+    hashmap::run();
+    hashset::run();
 }
