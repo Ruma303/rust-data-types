@@ -1,13 +1,7 @@
-mod lib;
-
-use crate::collections;
-use crate::primitives;
-use crate::customs;
-use crate::compounds;
+mod castings;
+mod scalars;
 
 fn main() {
-    primitives::run();
-    customs::run();
-    collections::run();
-    compounds::run();
+    castings::run();
+    scalars::run();
 }
