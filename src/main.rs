@@ -3,7 +3,7 @@ mod slice;
 mod tuple;
 
 fn main() {
-    array::run();
+    //array::run();
+    //tuple::run();
     slice::run();
-    tuple::run();
 }
