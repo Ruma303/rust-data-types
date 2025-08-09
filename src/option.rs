@@ -115,6 +115,17 @@ pub fn run() {
         None => println!("Age: None"),
     }
 
+    //, Uso riferimenti mutabili
+    let mut basket = Basket::new("Apple".to_string());
+    println!("Is basket empty: {}", basket.is_empty()); // false
+    println!("basket: {}", basket.get().unwrap()); // Apple viene spostata in items e sostituita con None
+    println!("Is basket empty: {}", basket.is_empty()); // true. Ora il cestino è vuoto
+
+    basket.put("Orange".to_string());
+    println!("basket: {}", basket.get().unwrap());// Orange viene spostata in items e sostituita con None
+
+    // Cataloga
+
     //, Accesso sicuro ai dati
     let x: Option<i32> = Some(10);
     let y: i32 = 14;
@@ -133,4 +144,27 @@ pub fn run() {
 
     let sum = x.unwrap_or_default() + y;
     println!("{}", sum);
+}
+
+//% Option con riferimenti mutabili
+struct Basket {
+    items: Option<String>,
+}
+
+impl Basket {
+    fn new(item: String) -> Basket {
+        Basket { items: Some(item) }
+    }
+
+    fn get(&mut self) -> Option<String> {
+        self.items.take()
+    }
+
+    fn put(&mut self, items: String) {
+        self.items = Some(items);
+    }
+
+    fn is_empty(&self) -> bool {
+        self.items.is_none()
+    }
 }
