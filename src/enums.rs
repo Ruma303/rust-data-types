@@ -5,6 +5,13 @@ enum Directions {
     West,
 }
 
+#[derive(PartialEq)]
+enum Color {
+    Red,
+    Green,
+    Blue,
+}
+
 pub fn run() {
     //% Enum
     let coo1: Directions = Directions::Nord;
@@ -58,30 +65,14 @@ pub fn run() {
     let msg4 = Message::Write("Hello, world!".to_string());
     msg4.actions();
 
-    //, Option enum
-    let number = Some(10);
-    let boolean = Some(true);
-    let nothing: Option<i32> = None;
+    //, PartialEq
+    let c1 = Color::Red;
+    let c2 = Color::Blue;
 
-    //# Sommare dati
-    let x: Option<i32> = Some(10);
-    let y: i32 = 14;
-    //let sum = x + y; //. Non sono lo stesso dato
-    //println!("{}", sum);
+    if c1 != c2 {
+        println!("I colori sono diversi!");
+    }
 
-    //* Metodi sicuri
-    let sum = x.unwrap() + y;
-    println!("{}", sum);
-
-    let sum = x.unwrap_or(0) + y;
-    println!("{}", sum);
-
-    //, Result enum
-    let message = Message::Send;
-    match message.is_sent() {
-        Ok(_) => println!("Il controllo ha confermato: il messaggio è stato inviato."),
-        Err(e) => println!("Errore durante l'invio del messaggio: {}", e),
-    } // Il controllo ha confermato: il messaggio è stato inviato.
 }
 
 //% Metodi associati
@@ -149,27 +140,4 @@ impl Message {
             Message::Write(text) => println!("Testo del messaggio: {}", text),
         }
     }
-
-    //, Metodi per Result
-    fn is_sent(&self) -> Result<(), String> {
-        match self {
-            Message::Send => {
-                self.actions(); // Invoca l'azione associata a Message::Send
-                Ok(())
-            }
-            _ => Err(String::from("Il messaggio non è stato inviato")),
-        }
-    }
 }
-
-//% Option enum
-/* enum Option<T> {
-    None,
-    Some(T)
-} */
-
-//% Result enum
-/* enum Result<T, E> {
-    Ok(T),
-    Err(E)
-} */
