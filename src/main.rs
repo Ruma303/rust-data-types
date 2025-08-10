@@ -1,11 +1,14 @@
 mod hashmap;
 mod hashset;
-mod string;
 mod vector;
+mod strings;
+
+use strings::{self as mod_strings, operations};
 
 fn main() {
-    vector::run();
-    string::run();
-    hashmap::run();
-    hashset::run();
+    mod_strings::run();
+    operations::run();
+    //vector::run();
+    //hashmap::run();
+    //hashset::run();
 }
