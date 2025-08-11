@@ -144,6 +144,13 @@ pub fn run() {
 
     let sum = x.unwrap_or_default() + y;
     println!("{}", sum);
+
+    //, Try operator ?
+    let result = first_char_uppercase("ciao");
+    println!("{:?}", result); // Some('C')
+
+    let result_none = first_char_uppercase("");
+    println!("{:?}", result_none); // None
 }
 
 //% Option con riferimenti mutabili
@@ -167,4 +174,11 @@ impl Basket {
     fn is_empty(&self) -> bool {
         self.items.is_none()
     }
+}
+
+
+//, Try operator ?
+fn first_char_uppercase(s: &str) -> Option<char> {
+    let first = s.chars().next()?; // Se stringa vuota → None
+    Some(first.to_uppercase().next()?)
 }
