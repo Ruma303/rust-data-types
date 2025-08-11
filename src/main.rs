@@ -1,15 +1,16 @@
-mod enums;
-mod option;
-mod result;
 mod structs;
+mod enums;
 mod generics;
 mod traits;
 
+use enums::{enums as enum_mod, option, result};
+
 fn main() {
-    //enums::run();
-    option::run();
+    // structs::run();
+    //enum_mod::run();
+    //option::run();      // Chiama enums/option.rs
+    result::run();      // Chiama enums/result.rs
     //result::run();
-    //structs::run();
     //generics::run();
     //traits::run();
 }
