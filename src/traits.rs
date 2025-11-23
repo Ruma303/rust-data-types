@@ -1,4 +1,4 @@
-// Senza traits
+//% Senza traits
 #[derive(Debug, PartialEq)]
 struct CommonShape {
     id: u32,
@@ -32,7 +32,7 @@ struct Square {
     }
 } */
 
-// Con traits
+//% Con traits
 trait Shape {
     // Definizione dei metodi che devono essere implementati dalle struct
     fn area(&self) -> u32;
@@ -73,27 +73,27 @@ impl GetId for Rectangle {
     }
 }
 
-// Trait Bound
-// Funzione generica che accetta qualsiasi tipo che implementa il trait Shape
+//% Trait Bound
 fn print_area<T: Shape>(shape: &T) {
     println!("Area: {}", shape.area());
 }
 
+// Impl Trait Syntax
 fn print_perimeter(shape: &impl Shape) {
     println!("Perimeter: {}", shape.perimeter());
-}
-
-fn print_area_and_perimeter<T>(shape: &T)
-where
-    T: Shape,
-{
-    print_area(shape);
-    print_perimeter(shape);
 }
 
 // Multi Trait Bound
 fn get_info<T: Shape + GetId>(shape: &T) {
     println!("Id: {}", shape.get_id());
+}
+
+// Where clause
+fn print_area_and_perimeter<T>(shape: &T)
+where T: Shape
+{
+    print_area(shape);
+    print_perimeter(shape);
 }
 
 fn get_info_where<T, U>(shape1: &T, shape2: &U)
@@ -108,8 +108,8 @@ where
     }
 }
 
-// Return Type Polymorphism
-fn returns_shape() -> impl Shape {
+//# Return Type Polymorphism
+fn returns_shape_1() -> impl Shape {
     Rectangle {
         width: 10,
         height: 20,
@@ -118,6 +118,30 @@ fn returns_shape() -> impl Shape {
             description: "Rectangle".to_string(),
             color: "Red".to_string(),
         },
+    }
+}
+
+fn returns_shape_2(condition: bool) -> impl Shape {
+    if condition {
+        Rectangle {
+            width: 10,
+            height: 20,
+            common: CommonShape {
+                id: 1,
+                description: "Rectangle".to_string(),
+                color: "Red".to_string(),
+            }
+        }
+    } else {
+        Rectangle { // stesso tipo concreto di sopra
+            width: 5,
+            height: 5,
+            common: CommonShape {
+                id: 2,
+                description: "Square".to_string(),
+                color: "Blue".to_string(),
+            }
+        }
     }
 }
 
@@ -130,7 +154,7 @@ trait Designable {
     fn print(&self);
 }
 
-// Super trait
+//% Super trait
 trait Drawable: Designable + Shape {
     fn draw(&self);
 }
@@ -169,7 +193,7 @@ where
     println!("Object: {:?}", object.area());
 }
 
-// Trait Object - Dynamic Dispatch
+//# Trait Object - Dynamic Dispatch
 fn print_shape_info(shape: &dyn Shape) {
     println!("Area: {}", shape.area());
 }
@@ -179,8 +203,8 @@ fn print_area_dyn_box(shape: Box<dyn Shape>) {
 }
 
 fn get_dynamic_info(dimension: Vec<u32>) -> Box<dyn Shape + 'static> {
-    if dimension.len() == 2 {
-        Box::new(Rectangle {
+    match dimension.len() {
+        2 => Box::new(Rectangle {
             width: dimension[0],
             height: dimension[1],
             common: CommonShape {
@@ -188,20 +212,21 @@ fn get_dynamic_info(dimension: Vec<u32>) -> Box<dyn Shape + 'static> {
                 description: "Rectangle".to_string(),
                 color: "Red".to_string(),
             },
-        })
-    } else {
-        Box::new(Square {
+        }),
+        1 => Box::new(Square {
             side: dimension[0],
             common: CommonShape {
                 id: 4,
                 description: "Square".to_string(),
                 color: "Blue".to_string(),
             },
-        })
+        }),
+        _ => panic!("Dimensioni non valide per creare una forma dinamica!"),
     }
 }
 
-// Marker Trait
+
+//% Marker Trait
 trait Sendable {}
 trait Cloneable: Sendable + PartialEq + Shape {}
 
@@ -295,7 +320,8 @@ pub fn run() {
     print_area_and_perimeter(&square);
     get_info_where(&rectangle, &square);
 
-    returns_shape();
+    returns_shape_1();
+    returns_shape_2(true);
 
     // Super Trait
     let c = Circle { radius: 5.0 };

@@ -1,6 +1,6 @@
-mod structs;
 mod enums;
 mod generics;
+mod structs;
 mod traits;
 
 use std::{fmt::Error, os::unix};
@@ -11,7 +11,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // structs::run();
     //enum_mod::run();
     //option::run();      // Chiama enums/option.rs
-    let _ = result::run();      // Chiama enums/result.rs
+    let _ = result::run(); // Chiama enums/result.rs
     //result::run();
     //generics::run();
     //traits::run();
@@ -30,8 +30,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if unix_time % 2 == 0 {
         return Err("Errore: tempo unix è pari".into());
     }
-
-
 
     Ok(())
 }
