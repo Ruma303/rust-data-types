@@ -1,3 +1,35 @@
+// Display trait
+pub fn display() {
+  const SEASONS: [&str; 4] = ["Spring", "Summer", "Fall", "Winter"];
+  
+  // Tipi primitivi implementano già il trait Display
+  println!("{}", 5);
+  println!("{}", 3.14);
+  println!("{}", true);
+  println!("{}", 'a');
+  println!("{}", "£");
+  
+  // I tipi composti invece no
+  // println!("{}", SEASONS); // Error
+}
+
+// Debug trait
+pub fn debug() {
+   const SEASONS: [&str; 4] = ["Spring", "Summer", "Fall", "Winter"];
+   println!("{:?}", SEASONS);
+   println!("{SEASONS:?}");
+   println!("{:#?}", SEASONS);
+}
+
+// macro dbg!
+pub fn dbg() {
+  const SEASONS: [&str; 4] = ["Spring", "Summer", "Fall", "Winter"];
+
+  dbg!(2 + 2);
+  dbg!(SEASONS, 7 * 2);
+}
+
+
 //% Senza traits
 #[derive(Debug, PartialEq)]
 struct CommonShape {
