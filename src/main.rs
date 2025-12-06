@@ -1,9 +1,9 @@
 mod castings;
+mod number_formatting;
 mod scalars;
-mod numer_formatting;
 
 fn main() {
+    scalars::run();
     // castings::cast();
-    // scalars::run();
-    numer_formatting::number_formatting();
+    // number_formatting::number_formatting();
 }
